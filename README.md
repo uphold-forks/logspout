@@ -6,6 +6,8 @@
 
 > Docker Hub automated builds for `gliderlabs/logspout:latest` and `progrium/logspout:latest` are now pointing to the `release` branch. For `master`, use `gliderlabs/logspout:master`. Individual versions are also available as saved images in [releases](https://github.com/gliderlabs/logspout/releases).
 
+**Note**: this version includes a temporary feature to include Rancher's `stack` and `service` as structured data.
+
 Logspout is a log router for Docker containers that runs inside Docker. It attaches to all containers on a host, then routes their logs wherever you want. It also has an extensible module system.
 
 It's a mostly stateless log appliance. It's not meant for managing log files or looking at history. It is just a means to get your logs out to live somewhere else, where they belong.
@@ -59,17 +61,17 @@ You can tell logspout to only include certain containers by setting filter param
 		--volume=/var/run/docker.sock:/var/run/docker.sock \
 		gliderlabs/logspout \
 		raw://192.168.10.10:5000?filter.name=*_db
-		
+
 	$ docker run \
 		--volume=/var/run/docker.sock:/var/run/docker.sock \
 		gliderlabs/logspout \
 		raw://192.168.10.10:5000?filter.id=3b6ba57db54a
-		
+
 	$ docker run \
 		--volume=/var/run/docker.sock:/var/run/docker.sock \
 		gliderlabs/logspout \
 		raw://192.168.10.10:5000?filter.sources=stdout%2Cstderr
-	
+
 	# Forward logs from containers with both label 'a' starting with 'x', and label 'b' ending in 'y'.
 	$ docker run \
 		--volume=/var/run/docker.sock:/var/run/docker.sock \
